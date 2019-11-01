@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pregi e Difetti</title>
+  </head>
+  <body>
+    <%include ./partials/nav.ejs%>
+    <style>
+      .in{width:3%;}
+      .fof{width:10%;}
+      .desc{width:40%;}
+      .req{width:5%;}
+    </style>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+      var socket = io();
+
+      var receivedFF = false;
+      if(!receivedFF)
+      {
+        socket.emit("F&F_req");
+      }
+      socket.on("F&F", function(feats, flaws){
+        console.log("received F&F");
+        for(var i=0 ; i<feats.length ; i++) $("#Feats").append('<tr><td><input type="checkbox" style="height:17px;width:17px;" name="' + i + '" value=""></td><td>' + feats[i].name + '</td><td>' + feats[i].desc + '</td><td>' + feats[i].req + '</td></tr>');
+        for(var i=0 ; i<flaws.length ; i++) $("#Flaws").append('<tr><td><input type="checkbox" style="height:17px;width:17px;" name="' + Number(i+feats.length) + '" value=""></td><td>' + flaws[i].name + '</td><td>' + flaws[i].desc + '</td><td>' + flaws[i].req + '</td></tr>');
+        receivedFF = true;
+      });
+    </script>
+
+    <form class="" action="/start" method="post">
+      <h1>Pregi e Difetti</h1>
+      <h1 id="warn">Dati incorretti. Si prega di riprovare</h1>
+      <h1 id="warn">Qualsiasi tentativo di falsificazione delle informazioni date può condurre allo smaltimento del soggetto, seguito dal protocollo <b id="redacted">redacted</b></h1>
+
+      <table style="background:#60626c; position:sticky; top:0; float:right; width:14.1%;">
+        <th style="font-size:16px;">
+            <b id="might">Might:<%=data.might%></b><br>
+            <b id="agility">Agility:<%=data.agility%></b><br>
+            <b id="vitality">Vitality:<%=data.vitality%></b><br>
+            <b id="smarts">Smarts:<%=data.smarts%></b><br>
+            <b id="experience">Experience:<%=data.experience%></b><br>
+            <b id="influence">Influence:<%=data.influence%></b>
+        </th>
+      </table>
+
+      <table id="Feats" style="position:relative; left:0; align:left; width:85.9%;">
+        <tr>
+          <th class="in"></th>
+          <th class="fof">Pregio</th>
+          <th class="desc">Descrizione</th>
+          <th class="req">requisiti</th>
+        </tr>
+      </table>
+      <br><br><br><br><br><br>
+      <table id="Flaws"  style="position:relative; left:0; width:85.9%;">
+        <tr>
+          <th class="in"></th>
+          <th class="fof">Difetto</th>
+          <th class="desc">Descrizione</th>
+          <th class="req">requisiti</th>
+        </tr>
+      </table>
+
+      <br><br><br><br><br><br>
+
+      <input type="text" style="display:none" name="playerNum" value="<%=playerNum%>">
+
+      <input type="submit" name="" value="gioca" style="font-size:40px;">
+    </form>
+
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Inventario giocatore <%=playerNum%></title>
+    <%include ./partials/nav.ejs%>
+  </head>
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+      var socket = io();
+      socket.emit("invReq", <%=playerNum%>);
+      socket.on("inv"+'<%=playerNum%>', function(data, weight){
+        console.log('Received the inv');
+        $("#inventory").empty();
+        $("#inventory").append("<tr><th>X</th><th>Oggetto</th><th>Danno</th><th>Peso</th></tr>");
+
+        for(var i=0 ; i<data.length ; i++)
+        {
+          if(data[i]!=undefined) $("#inventory").append('<tr><td><input type="checkbox" name="' + i + '"></td><td>' + data[i].name + '</td><td>' + data[i].damage + '</td><td>' + data[i].weight + '</td></tr>');
+        }
+      });
+    </script>
+    <form action="/invRem" method="post">
+      <table id="inventory" align="center">
+      </table>
+
+      <input type="text" style="display:none" name="playerNum" value="<%=playerNum%>">
+
+      <input type="submit" value="Applica" style="font-size:40px;">
+    </form>
+
+  </body>
+</html>

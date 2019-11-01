@@ -1,0 +1,591 @@
+{"f":[
+
+		{
+			"name":"Accurato (+2)",
+			"desc":"Hai più percezione quando cerchi per qualcosa (+2 quando devi cercare oggetti, +1 quando spari con un'arma).",
+			"req":"Vit<7",
+			"cost":2
+		},
+
+		{
+			"name":"Acrobatico (+2)",
+			"desc":"+2 Quando devi arrampicarti, più un'opportunità per arrampicarti in posti non arrampicabili.",
+			"req":"Agi<8",
+			"cost":2
+		},
+
+		{
+			"name":"Cautela (+2)",
+			"desc":"Reagisci meglio al pericolo, +2 al tiro di iniziativa, e puoi tirare i dati per tentare di evitare sorprese.",
+			"req":"Exp<8",
+			"cost":2
+		},
+
+		{
+			"name":"Anatomia (+2)",
+			"desc":"Conosci bene l'anatomia umana. Possibilità di fare un critico quando tiri 19.",
+			"req":"exp<9",
+			"cost":2
+		},
+
+		{
+			"name":"Anatomia (+4)",
+			"desc":"Non solo conosci bene l'anatomia umana, ma anche quella degli scp. Possibilità di fare un critico quando tiri 19.",
+			"req":"exp<9",
+			"cost":4
+		},
+
+		{
+			"name":"Empatia Animale (+1)",
+			"desc":"Puoi calmare per poi manipolare animali, inclusi gli scp, +1 ai tiri di dado sull'influence nelle persuasioni animali.",
+			"req":"inf<8",
+			"cost":1
+		},
+
+		{
+			"name":"Valutare Oggetti (+2)",
+			"desc":"Sei in grado di determinare utilizzi per un oggetto dopo qualche minuto di ispezione, e un tiro di smarts.",
+			"req":"smarts<7",
+			"cost":2
+		},
+
+		{
+			"name":"Esperto delle armature (+3)",
+			"desc":"+2 a tutti i pezzi di armatura, Ignori 3 punti di armatura quando attacchi.",
+			"req":"Might<7, Lavoratore delle armature",
+			"cost":3
+		},
+
+		{
+			"name":"Lavoratore delle armature (+2)",
+			"desc":"+1 a tutti i pezzi di armatura, ignori 1 punto di armatura quando attacchi.",
+			"req":"Might<8",
+			"cost":2
+		},
+
+		{
+			"name":"Attraente (+1)",
+			"desc":"+1 ai tiri di dado sull'influence con chi trova il tuo sesso attraente.",
+			"req":"",
+			"cost":1
+		},
+
+		{
+			"name":"Attraente (+3)",
+			"desc":"+2 ai tiri di dado sull'influence con chi trova il tuo sesso attraente.",
+			"req":"",
+			"cost":3
+		},
+
+		{
+			"name":"Attraente (+5)",
+			"desc":"+3 ai tiri di dado sull'influence con chi trova il tuo sesso attraente.",
+			"req":"",
+			"cost":5
+		},
+
+		{
+			"name":"Attacco alle Spalle (+2)",
+			"desc":"+1 al danno se sorprendi un nemico, e il tuo colpo ignora l'armatura.",
+			"req":"Agi<7, ",
+			"cost":2
+		},
+
+		{
+			"name":"Combattimento Cieco (+2)",
+			"desc":"Sei in grado di combattere in situazioni dove non puoi vedere, o se scegli di chiudere gli occhi.",
+			"req":"",
+			"cost":2
+		},
+
+		{
+			"name":"Bravado (+1)",
+			"desc":"Non vieni stordito da attacchi nemici, +4 ai tiri contro la perdità di sanità o la paura.",
+			"req":"Might<8",
+			"cost":1
+		},
+
+		{
+			"name":"Esperto Nel trattenere il respiro (+2)",
+			"desc":"Duri il doppio di quanto dureresti normalmente in ambienti dove non puoi respirare.",
+			"req":"Vit<8",
+			"cost":2
+		},
+
+		{
+			"name":"Casto (+1)",
+			"desc":"Non vieni attratto dal sesso oppostò nè da scp che influenzano il fascino.",
+			"req":"",
+			"cost":1
+		},
+
+		{
+			"name":"Soffocamento (+1)",
+			"desc":"Puoi stordire qualcuno fino a fargli perdere i sensi. Il bersaglio perde i sensi per 2D4 round.",
+			"req":"Might<9, Agi<9, Addestramento al Combattimento Disarmato, Tenuta",
+			"cost":1
+		},
+
+		{
+			"name":"Hacker (+2)",
+			"desc":"Hai l'abilità di usare e programmare i computer.",
+			"req":"Smarts<6, Esperto dei Computer",
+			"cost":2
+		},
+
+		{
+			"name":"Esperto dei Computer (+2)",
+			"desc":"Hai l'abilità di usare e programmare i computer, ma con meno efficacia.",
+			"req":"Smarts<8",
+			"cost":2
+		},
+
+		{
+			"name":"Attacco Coordinato (+2)",
+			"desc":"Riesci ad attaccare nello stesso turno di un giocatore con questa pregio.",
+			"req":"Smarts<9, un altro giocatore con questa pregio",
+			"cost":2
+		},
+
+		{
+			"name":"Contrattacco (+2)",
+			"desc":"Se un nemico manca un attacco hai la possibilità di colpire con un contrattacco.",
+			"req":"Agi<8",
+			"cost":2
+		},
+
+		{
+			"name":"Presenza intimidatoria (+2)",
+			"desc":"+2 ai tiri di dadi sull'influence quando minacci qualcuno, in combattimento possiblità di causare paura se fai colpo critico.",
+			"req":"Influence<7",
+			"cost":2
+		},
+
+		{
+			"name":"Ingannatorio (+1)",
+			"desc":"+2 ai tiri di dadi sull'influence quando inganni qualcuno, +1 a smarts se qualcuno tenta di ingannarti.",
+			"req":"Influence<9",
+			"cost":1
+		},
+
+		{
+			"name":"Esperto delle Schivate (+2)",
+			"desc":"Puoi tentare di schivare freccie e altri oggetti lanciati con +2 ai tiri di dadi di agilità.",
+			"req":"Agi<6, Apprendista delle Schivate",
+			"cost":2
+		},
+
+		{
+			"name":"Apprendista delle Schivate (+2)",
+			"desc":"Puoi schivare attacchi fisici con un tiro all'agilità.",
+			"req":"Agi<8",
+			"cost":2
+		},
+
+		{
+			"name":"mani abili (+1)",
+			"desc":"Puoi effettuare abilità di soppiatto, come borseggiare con un tiro all'agilità.",
+			"req":"Agi<9",
+			"cost":1
+		},
+
+		{
+			"name":"persona ostinata (+2)",
+			"desc":"Puoi combattere anche se hai la vita sotto allo 0.",
+			"req":"Vit<7, Cura di Sè Stesso (>2)",
+			"cost":2
+		},
+
+		{
+			"name":"Allenamento alla Resistenza (+2)",
+			"desc":"Vieni affaticato la metà del solito.",
+			"req":"Agi<9, Might<9 O Vit<9",
+			"cost":2
+		},
+
+		{
+			"name":"Conoscenza Ingegnieristica (+2)",
+			"desc":"Puoi smantellare o aggiustare di tutto. +1 di danno a macchinari, e ignori l'armatura dei macchinari.",
+			"req":"Smarts<8",
+			"cost":2
+		},
+
+		{
+			"name":"Connessione Eterea (+2)",
+			"desc":"Sei in grado di vedere spiriti e SCP paranormali, e sei in grado di determinare la loro ostilità.",
+			"req":"",
+			"cost":2
+		},
+
+		{
+			"name":"Allenamento Estremo per la Sopravvivenza(+3)",
+			"desc":"+4 ai tiri sulla navigazione, trovi cibo e acqua più facilmente. Puoi anche deteminare l'ostilità di un scp tirando con un -4.",
+			"req":"Vit<6, Allenamento per la Sopravvivenza",
+			"cost":3
+		},
+
+		{
+			"name":"Senza Paura (+2)",
+			"desc":"Non prendi paura da nessuno a parte dagli scp, e da loro prendi metà.",
+			"req":"Exp<8",
+			"cost":2
+		},
+
+		{
+			"name":"Finto Ferito (+1)",
+			"desc":"Riesci a fingerti ferito, fingendo una vulnerabilità. Se non vieni scoperto nell'atto, puoi attaccare di sorpresa.",
+			"req":"Exp<8, Influence<9",
+			"cost":1
+		},
+
+		{
+			"name":"Istinto Attacco o Fuga (+2)",
+			"desc":"Riesci a percepire il pericolo, e se combatterlo o fuggire da esso.",
+			"req":"Exp<9, Vit<9",
+			"cost":2
+		},
+
+		{
+			"name":"Flessibile (+2)",
+			"desc":"Sei in grado di entrare in fessure ampie 1/4 della tua statura, puoi anche tentare la fuga da gabbie, manette o altre trappole.",
+			"req":"Agi<8",
+			"cost":2
+		},
+
+		{
+			"name":"Karma Buono (+3)",
+			"desc":"Ottieni il doppio dei punti karma, e la metà dei punti maledizione (1 punto maledizione non ti fa niente).",
+			"req":"Influence<9 O EXP<9",
+			"cost":3
+		},
+
+		{
+			"name":"Tenuta (+2)",
+			"desc":"Riesci a tenere un nemico, per poi continuare a tenerlo, attaccarlo o lanciarlo.",
+			"req":"Might<7, Addestramento al Combattimento Disarmato",
+			"cost":2
+		},
+
+		{
+			"name":"Pugni Duri (+1)",
+			"desc":"Puoi Rompere alcuni oggetti di legni con i tuoi pugni, +2 ai tiri mentre combatti disarmato.",
+			"req":"Might<7",
+			"cost":1
+		},
+
+		{
+			"name":"Cura di Sè Stesso (+1)",
+			"desc":"Puoi aggiungere un punto di vita ad una parte del corpo di tua scelta.",
+			"req":"Vit<9",
+			"cost":1
+		},
+
+		{
+			"name":"Cura di Sè Stesso (+2)",
+			"desc":"Puoi aggiungere due punti di vita ad una parte del corpo di tua scelta.",
+			"req":"Vit<9",
+			"cost":2
+		},
+
+		{
+			"name":"Cura di Sè Stesso (+3)",
+			"desc":"Puoi aggiungere tre punti di vita ad una parte del corpo di tua scelta.",
+			"req":"Vit<9",
+			"cost":3
+		},
+
+		{
+			"name":"Alta Società (+1)",
+			"desc":"+2 ai tiri di influence quando parli con individui di classe B e A.",
+			"req":"Influence<9",
+			"cost":1
+		},
+
+		{
+			"name":"Intestino di ferro (+1)",
+			"desc":"Sei in grado di resistere agli effetti negativi di tutte le sostanze, con il 50% di possibilità di non riscontrare effetti negativi quando consumi un scp.",
+			"req":"Vit<8",
+			"cost":1
+		},
+
+		{
+			"name":"Lacerare (+2)",
+			"desc":"Sei in grado di far sanguinare i tuoi nemici con armi taglienti per 1D4 round.",
+			"req":"Exp<7, Attacco alle Spalle, Anatomia",
+			"cost":2
+		},
+
+		{
+			"name":"Multiattacco (+2)",
+			"desc":"Sei in grado di fare 2 attacchi se sei disarmato.",
+			"req":"Addestramento al combattimento disarmato",
+			"cost":2
+		},
+
+		{
+			"name":"Multiattacco Armato (+2)",
+			"desc":"Puoi tenere armi in entrambi le mani, e usarle contemporaneamente.",
+			"req":"Esperto di qualsiasi arma di mischia",
+			"cost":2
+		},
+
+		{
+			"name":"Guarigione Naturale (+2)",
+			"desc":"Rigeneri un punto vita ogni 10 minuti, fino a 3/4 la tua vita.",
+			"req":"Vit<6",
+			"cost":2
+		},
+
+		{
+			"name":"Negoziante (+1)",
+			"desc":"Riesci a percepire l'atteggiamento che hanno gli altri su di te, e hai una possiblità di renderli più amichevoli",
+			"req":"Inf<9",
+			"cost":1
+		},
+
+		{
+			"name":"Visione Notturna (+1)",
+			"desc":"Riesci a vedere perfettamente in ambienti illuminati poco, e riesci a vedere la metà di quanto vedi di solito in ambienti non illuminati",
+			"req":"Agi<9",
+			"cost":1
+		},
+
+		{
+			"name":"Dita Agili (+1)",
+			"desc":"Puoi disattivare dispositivi e trappole con +2 agilità",
+			"req":"Agi<9",
+			"cost":1
+		},
+
+		{
+			"name":"Stato Mentale Normalizzato (+2)",
+			"desc":"Rigeneri 1 punto di sanità ogni 5 minuti se non hai paura e non sei affaticato.",
+			"req":"Smarts<6",
+			"cost":2
+		},
+
+		{
+			"name":"Piano B (+2)",
+			"desc":"Una volta per sessione puoi scegliere di rifare una serie di tirate (A Discrezione del GM).",
+			"req":"Smarts<9, Exp<8",
+			"cost":2
+		},
+
+		{
+			"name":"Fingerti Morto (+1)",
+			"desc":"+4 ai tiri sull'influence quando tenti di fingerti morto.",
+			"req":"Infuence<8",
+			"cost":1
+		},
+
+		{
+			"name":"Colpo di Forza (+1)",
+			"desc":"Il tuo primo attacco (se disarmato) in combattimento fa +3 di danno e ignora l'armatura.",
+			"req":"Might<7, Combattimento Disarmato",
+			"cost":1
+		},
+
+		{
+			"name":"Mente Protetta (+4)",
+			"desc":"Perdi la metà di sanità e gli effetti mentali manipolativi degli scp hanno la metà dell'efficacia contro di te.",
+			"req":"Vit<7",
+			"cost":4
+		},
+
+		{
+			"name":"Rapidità (+1)",
+			"desc":"Ricarichi e cambi armi molto più velocemente.",
+			"req":"Agi<7",
+			"cost":1
+		},
+
+		{
+			"name":"Conoscenza degli SCP (+1)",
+			"desc":"Conosci 1 SCP a tua scelta.",
+			"req":"Classe C o B",
+			"cost":1
+		},
+
+		{
+			"name":"Conoscenza degli SCP (+2)",
+			"desc":"Conosci 2 SCP a tua scelta.",
+			"req":"Classe C o B",
+			"cost":2
+		},
+
+		{
+			"name":"Conoscenza degli SCP (+3)",
+			"desc":"Conosci 3 SCP a tua scelta.",
+			"req":"Classe C o B",
+			"cost":3
+		},
+
+		{
+			"name":"Conoscenza degli SCP (+4)",
+			"desc":"Conosci 4 SCP a tua scelta.",
+			"req":"Classe C o B",
+			"cost":4
+		},
+
+		{
+			"name":"Conoscenza degli SCP (+5)",
+			"desc":"Conosci 5 SCP a tua scelta.",
+			"req":"Classe C o B",
+			"cost":5
+		},
+
+		{
+			"name":"Pass di Sicurezza (+1)",
+			"desc":"Cominci il gioco con un pass di sicurezza di un grado più alto del tuo, ma se vieni scoperto ad usare pass di sicurezza di livello più alto verrai retrocesso di grado.",
+			"req":"Classe C",
+			"cost":1
+		},
+
+		{
+			"name":"Improvvisatore di Scudi (+1)",
+			"desc":"Sei in grado di utilizzare qualsiasi cosa come scudo.",
+			"req":"Might<7",
+			"cost":1
+		},
+
+		{
+			"name":"Velocista (+1)",
+			"desc":"Se stai trasportando meno di 10lbs di oggetti puoi camminare 1,5 metri più velocemente e 3 metri se corri.",
+			"req":"Agi<8",
+			"cost":1
+		},
+
+		{
+			"name":"Linguaggio dei segni (+1)",
+			"desc":"Conosci il linguaggio dei segni, e lo puoi usare assieme ad un altro giocatore che conosce il linguaggio dei segni, senza limiti di distanza",
+			"req":"",
+			"cost":1
+		},
+
+		{
+			"name":"Furtivo (+3)",
+			"desc":"Puoi soprendere un nemico per ottenere iniziativa in un combattimento.",
+			"req":"Agi<7",
+			"cost":3
+		},
+
+		{
+			"name":"Vita Stressante (+3)",
+			"desc":"Sei abituato allo stress, quindi ne ricevi la metà del normale.",
+			"req":"Exp<9 O Smarts<9",
+			"cost":3
+		},
+
+		{
+			"name":"Allenamento per la Sopravvivenza (+1)",
+			"desc":"Trovi più facilmente cibo e acqua.",
+			"req":"Vit<9",
+			"cost":1
+		},
+
+		{
+			"name":"Pelle Dura (+2)",
+			"desc":"Riduci il danno che ricevi di 1. Danno sotto al 3 non ti fa nulla.",
+			"req":"Vit<8",
+			"cost":2
+		},
+
+		{
+			"name":"Inciampata (+1)",
+			"desc":"Puoi fare gli sgambetti.",
+			"req":"",
+			"cost":1
+		},
+
+		{
+			"name":"Allenamento Disarmato (+1)",
+			"desc":"+1 agli attacchi disarmati.",
+			"req":"Might<9",
+			"cost":1
+		},
+
+		{
+			"name":"Esperto delle Lame (+2)",
+			"desc":"+2 danno quando usi delle lame",
+			"req":"Might<6, Addestramento delle Lame",
+			"cost":2
+		},
+
+		{
+			"name":"Esperto degli Archi (+2)",
+			"desc":"+2 danno quando usi archi",
+			"req":"Agi<7, Addestramento degli Archi",
+			"cost":2
+		},
+
+		{
+			"name":"Esperto delle armi Corpo a Corpo (+2)",
+			"desc":"+2 danno quando usi armi corpo a corpo (escluse lame)",
+			"req":"Might<7, Addestramento delle armi Corpo a Corpo",
+			"cost":2
+		},
+
+		{
+			"name":"Esperto degli Esplosivi (+2)",
+			"desc":"+2 danno quando usi esplosivi",
+			"req":"Agi<8, Smarts<7, Addestramento degli Esplosivi",
+			"cost":2
+		},
+
+		{
+			"name":"Esperto delle Armi (+2)",
+			"desc":"+2 danno quando usi delle armi",
+			"req":"Agi<6, Addestramento delle Armi",
+			"cost":2
+		},
+
+		{
+			"name":"Esperto delle Armi Speciali (+2)",
+			"desc":"+2 danno quando usi delle armi speciali",
+			"req":"Smarts<6, Addestramento delle Armi Speciali",
+			"cost":2
+		},
+
+		{
+			"name":"Addestramento delle Lame (+1)",
+			"desc":"Non ottieni effetti negativi quando usi le lame",
+			"req":"Might<8",
+			"cost":1
+		},
+
+		{
+			"name":"Addestramento degli Archi (+1)",
+			"desc":"Non ottieni effetti negativi quando usi gli Archi",
+			"req":"Agi<9",
+			"cost":1
+		},
+
+		{
+			"name":"Addestramento delle Armi Corpo a Corpo (+1)",
+			"desc":"Non ottieni effetti negativi quando usi le armi corpo a corpo (escluse lame)",
+			"req":"Might<9",
+			"cost":1
+		},
+
+		{
+			"name":"Addestramento degli Esplosivi (+2)",
+			"desc":"Non ottieni effetti negativi quando usi gli esplosivi",
+			"req":"Agi<9, Smarts<9",
+			"cost":2
+		},
+
+		{
+			"name":"Addestramento delle Armi (+2)",
+			"desc":"Non ottieni effetti negativi quando usi le armi",
+			"req":"Agi<8",
+			"cost":2
+		},
+
+		{
+			"name":"Addestramento delle Speciali (+2)",
+			"desc":"Non ottieni effetti negativi quando usi le Armi Speciali",
+			"req":"Smarts<8, Classe C in sù",
+			"cost":2
+		}
+
+]}

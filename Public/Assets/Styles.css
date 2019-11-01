@@ -1,0 +1,10 @@
+body{background: #60626c; text-align: center; padding-right: 100px; padding-left: 100px; padding: 10px;}
+p, label, input, tr, h3, li{font-size: 22px; font: Monospace; text-transform: uppercase; padding-bottom: 10px; padding-top: 10px;}
+table, th, td{border:1.5px solid black; border-collapse:collapse; padding:8px;}
+tr{font-size:20px; padding-right:0px; padding-left:0px;}
+.num{padding:0px; width: 50px; height:19px;}
+#txt{height: 16px;}
+#redacted{background: black;color:black;}
+input, select{background: #60626c; border:2px solid #000000; padding: 2px;}
+.FF{ width:1000px; height:2px;}
+#warn{color:red;}

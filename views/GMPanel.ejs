@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GM</title>
+    <%include ./partials/nav.ejs%>
+
+    <style>
+      .hide{
+        display: none;
+      }
+      .gmList{
+        font-size:30px;
+        border:none;
+        background-color: #60626c;
+        user-select:none;
+      }
+      .gmListTable{
+        padding-top : 30px;
+        border:none;
+      }
+      .gmP{
+        display:none;
+      }
+      .gmList:hover{
+        color:#c6c6c6;
+      }
+      .gmP:checked + .gmList{
+        color:#4a4a4a;
+      }
+      .check{
+        height:20px;
+        width:20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <table>
+      <tr>
+        <form action="/saveGame" method="post"></form>
+          <table align="center">
+            <th><input type="text" name="data"></th>
+            <th><input type="submit" value="Salva"></th>
+          </table>
+        </form>
+      </tr>
+      <br><br>
+      <tr>
+        <td>
+          <form action="/loadGame" method="post">
+            <table align="center">
+              <th><input type="text" name="data"></th>
+              <th><input type="submit" value="Carica"></th>
+            </table>
+          </form>
+        </td>
+      </tr>
+    </table>
+
+    <table class="gmListTable" align="center"><!-- player list !-->
+      <tr class="gmListTable" id="pList"></tr>
+    </table>
+
+    <div id="pMenu" class="hide">
+      <form id="pMod" action="/GM" method="post"></form>
+
+        <h2>Statistiche di <b id="player"></b></h2>
+        <h2 for="player">Giocatore n°<b id="playerNum"></b></h2>
+        <input form="pMod" type="number" name="player" id="playerN" class="hide" class="num">
+        <table align="center">
+          <tr>
+            <td>
+              <h3>Vita: <b id="HP"></b>/<b id="HPM"></b></h3>
+              <ul>
+                <li>Testa: <b><input name="H" form="pMod" type="number" id="H" class="num" value=""></b>/<b id="hMHP"></b></li>
+                <li>Corpo: <b><input name="B" form="pMod" type="number" id="B" class="num"></b>/<b id="bMHP"></b></li>
+                <li>Braccio Sinistro: <b><input name="LA" form="pMod" type="number" id="LA" class="num"></b>/<b id="laMHP"></b></li>
+                <li>Braccio Destro: <b><input name="RA" form="pMod" type="number" id="RA" class="num"></b>/<b id="raMHP"></b></li>
+                <li>Gamba Sinistra: <b><input name="LL" form="pMod" type="number" id="LL" class="num"></b>/<b id="llMHP"></b></li>
+                <li>Gamba Destra: <b><input name="RL" form="pMod" type="number" id="RL" class="num"></b>/<b id="rlMHP"></b></li>
+              </ul>
+            </td>
+            <td>
+              <h3>Armatura: <b id="AV"></b></h3>
+              <ul>
+                <li>Testa: <b><input name="AH" form="pMod" type="number" id="AH" class="num"></b></li>
+                <li>Corpo: <b><input name="AB" form="pMod" type="number" id="AB" class="num"></b></li>
+                <li>Braccio Sinistro: <b><input name="ALA" form="pMod" type="number" id="ALA" class="num"></b></li>
+                <li>Braccio Destro: <b><input name="ARA" form="pMod" type="number" id="ARA" class="num"></b></li>
+                <li>Gamba Sinistra: <b><input name="ALL" form="pMod" type="number" id="ALL" class="num"></b></li>
+                <li>Gamba Destra: <b><input name="ARL" form="pMod" type="number" id="ARL" class="num"></b></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h3>Sanità Mentale: <b><input name="sanity" form="pMod" type="number" id="sanity" class="num"></b>/<b id="sanityM"></b></h3>
+
+              <ul>
+                <li>Paura: <b><input name="fear" form="pMod" type="number" id="fear" class="num">/5</b></li>
+                <li>Stress: <b><input name="stress" form="pMod" type="number" id="stress" class="num">/5</b></li>
+                <li>Fatica: <b><input name="strain" form="pMod" type="number" id="strain" class="num">/5</b></li>
+                <li>Karma: <b><input name="karma" form="pMod" type="number" id="karma" class="num">/5</b></li>
+                <li>Maledizione: <b><input name="curse" form="pMod" type="number" id="curse" class="num">/5</b></li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Might: <b id="might"></b></li>
+                <li>Agility: <b id="agility"></b></li>
+                <li>Vitality: <b id="vitality"></b></li>
+                <li>Smarts: <b id="smarts"></b></li>
+                <li>Experience: <b id="experience"></b></li>
+                <li>Influence: <b id="influence"></b></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+
+        <h3>Peso: <b id="weight"> </b>/<b id="weightM"> </b></h3>
+        <form id="invRm" action="/invRem" method="post"></form>
+        <form action="/GM/invMod" id="invAdd" method="post"></form>
+
+          <table id="inventory" align="center">
+          </table>
+
+          <input form="invRm" id="invR" type="text" style="display:none;" name="playerNum">
+          <input form="invAdd" id="invA" type="text" name="playerNum" style="display:none;">
+
+          <table align="center">
+            <td><input form="invAdd" type="submit" value="Aggiungi" style="font-size:20px;"></td>
+            <td><input form="invRm" type="submit" value="Rimuovi" style="font-size:20px;"></td>
+          </table>
+
+
+        <br><br><br>
+
+        <h3>Pregi e Difetti:</h3>
+        <table id="FF" class="FF" align="center">
+          <tr>
+            <th>Nome</th>
+            <th>Descrizione</th>
+            <th>Requisiti</th>
+          </tr>
+        </table>
+        <br><br>
+        <input form="pMod" type="submit" value="Applica" style="font-size:40px;">
+
+    </div>
+
+  </body>
+
+  <script>
+    var socket = io();
+    var playerData = {};
+
+    var sel = [];
+    var mSel;
+
+    var players = [];
+    var playerMenu = document.getElementById('pMenu');
+
+    socket.emit('playerList');
+    socket.on('playerInfo', function(pd){
+      playerData = pd;
+      console.log('playerData received.');
+      for(i = 0 ; i<playerData.length ; ++i)
+      {
+        sel[i] = false;
+        var a = +playerData[i].player-1;
+
+        $('#pList').append('<td class="gmListTable"><input type="checkbox" form="pMod" value="' + a + '" id="'+ a +'" name="playerList" class="gmP hide"><label class="gmList" for="' + a + '">[' + playerData[i].playerName + ']</label></td>');
+
+        players[i] = document.getElementById(a);
+
+        players[i].addEventListener("click", playerLis);
+      }
+    });
+
+    function playerLis()
+    {
+      playerMenu.className = "";
+      var pNum = Number(this["id"]);
+      mSel = 0;//multiple selections
+
+      console.log(sel[pNum]);
+      sel[pNum] = !sel[pNum];
+
+      for(var i=0 ; (i<sel.length)&&!mSel ; i++)
+      {
+        if(sel[i] && i!=(pNum)) mSel = 1;//if there's another sel element
+      }
+
+      if(sel[pNum]==false && mSel==0)
+      {
+        mSel = 2;
+      }
+
+      switch(mSel)
+      {
+        case 0:{
+          socket.emit("invReq", (pNum+1));
+          socket.on("inv"+(pNum+1), function(data){
+            console.log('Received the inv');
+            $("#inventory").empty();
+            $("#inventory").append("<tr><th>X</th><th>Oggetto</th><th>Danno</th><th>Peso</th></tr>");
+
+            for(var i=0 ; i<data.length ; i++)
+            {
+              if(data[i]!=undefined) $("#inventory").append('<tr><td><input form="invRm" type="checkbox" class="check" name="' + i + '"></td><td>' + data[i].name + '</td><td>' + data[i].damage + '</td><td>' + data[i].weight + '</td></tr>');
+            }
+            $("#inventory").append('<tr><td></td><td><input form="invAdd" type="text" name="itemName"></input></td><td><input form="invAdd" type="text" name="itemDamage"></input></td><td><input form="invAdd" type="number" name="itemWeight"></input></td></tr>');
+          });
+
+          var receivedFF = false;
+
+          socket.emit("FFReq", pNum+1);
+          socket.on("FF"+(pNum+1), function(data)
+          {
+            console.log("Received Feats & Flaws")
+
+            $("#FF").empty();
+            $("#FF").append("<tr><th>Nome</th><th>Descrizione</th><th>Requisiti</th>");
+
+            if(!receivedFF)
+            {
+              for( var i=0 ; i<data.length ; i++ ) if(data[i]!=null)
+              {
+                $("#FF").append('<tr><td>' + data[i].name + '</td><td>' + data[i].desc + '</td><td>' + data[i].req + '</td></tr>');
+              }
+              receivedFF = true;
+            }
+            else
+            {
+              console.log("Not applying FF, because I already have them");
+            }
+          });
+          socket.emit("pInfo", pNum, true);
+
+          break;
+        }
+        case 1:{
+          $("#FF").empty();
+          $("#inventory").empty();
+          $("#inventory").append('<tr><td></td><td><input form="invAdd" type="text" name="itemName"></input></td><td><input form="invAdd" type="text" name="itemDamage"></input></td><td><input form="invAdd" type="number" name="itemWeight"></input></td></tr>');
+          socket.emit("pInfo", pNum, false);
+          break;
+        }
+        case 2:{
+          playerMenu.className = "hide";
+          break;
+        }
+      }
+
+
+      socket.on("ePInfo"+pNum, function(data){
+        console.log(data);
+        var HP = (Number(data.H)+Number(data.B)+Number(data.RA)+Number(data.LA)+Number(data.RL)+Number(data.LL));
+        var AHP = (Number(data.AH)+Number(data.AB)+Number(data.ARA)+Number(data.ALA)+Number(data.ARL)+Number(data.ALL));
+
+        document.getElementById("invR").value = data.player||-1;
+        document.getElementById("invA").value = data.player-1||-1;
+
+        document.getElementById("playerNum").innerText = data.player||-1;
+        document.getElementById("playerN").value = data.player||-1;
+        document.getElementById("player").innerText = data.playerName||"Selezione Multipla";
+
+
+        document.getElementById("HP").innerText = (HP)||0;
+        document.getElementById("HPM").innerText = (data.HPM)||0;
+
+        document.getElementById("H").value = (data.H)||0;
+        document.getElementById("B").value = (data.B)||0;
+        document.getElementById("LA").value = (data.LA)||0;
+        document.getElementById("RA").value = (data.RA)||0;
+        document.getElementById("LL").value = (data.LL)||0;
+        document.getElementById("RL").value = (data.RL)||0;
+
+        document.getElementById("hMHP").innerText = (data.MH)||0;
+        document.getElementById("bMHP").innerText = (data.MB)||0;
+        document.getElementById("laMHP").innerText = (data.MA)||0;
+        document.getElementById("raMHP").innerText = (data.MA)||0;
+        document.getElementById("llMHP").innerText = (data.ML)||0;
+        document.getElementById("rlMHP").innerText = (data.ML)||0;
+
+        document.getElementById("AH").value = (data.AH)||0;
+        document.getElementById("AB").value = (data.AB)||0;
+        document.getElementById("ALA").value = (data.ALA)||0;
+        document.getElementById("ARA").value = (data.ARA)||0;
+        document.getElementById("ALL").value = (data.ALL)||0;
+        document.getElementById("ARL").value = (data.ARL)||0;
+
+        document.getElementById("sanity").value = (data.sanity)||0;
+        document.getElementById("sanityM").innerText = (data.sanityM)||0;
+
+        document.getElementById("fear").value = (data.fear)||0;
+        document.getElementById("stress").value = (data.stress)||0;
+        document.getElementById("strain").value = (data.strain)||0;
+        document.getElementById("karma").value = (data.karma)||0;
+        document.getElementById("curse").value = (data.curse)||0;
+
+        document.getElementById("might").innerText = data.might||0;
+        document.getElementById("agility").innerText = data.agility||0;
+        document.getElementById("vitality").innerText = data.vitality||0;
+        document.getElementById("smarts").innerText = data.smarts||0;
+        document.getElementById("experience").innerText = data.experience||0;
+        document.getElementById("influence").innerText = data.influence||0;
+
+        document.getElementById("weight").innerText = data.weight||0;
+        document.getElementById("weightM").innerText = data.weightM||0;
+
+      });
+
+    }
+  </script>
+
+</html>

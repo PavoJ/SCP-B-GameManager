@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <%include ./partials/nav.ejs%>
+    <meta charset="utf-8">
+    <title><%=data.player%>.<%=data.playerName%></title>
+  </head>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+      var socket = io();
+
+      socket.emit("invReq", <%=data.player%>);
+      socket.on("inv"+'<%=data.player%>', function(data, weight){
+        console.log('Received the inv');
+        console.log(data.length);
+        $("#inventory").empty();
+        $("#inventory").append("<tr><th>Oggetto</th><th>Danno</th><th>Peso</th></tr>");
+        for(var i=0 ; i<data.length ; i++)
+        {
+          if(data[i]!=undefined) $("#inventory").append('<tr><td>' + data[i].name + '</td><td>' + data[i].damage + '</td><td>' + data[i].weight + '</td></tr>');
+        }
+        $("#weight").html(weight);
+      });
+
+      var receivedFF = false;
+      socket.emit("FFReq", <%=data.player%>);
+      socket.on("FF"+'<%=data.player%>', function(data)
+      {
+        console.log("Received Feats & Flaws")
+        if(!receivedFF)
+        {
+          for( var i=0 ; i<data.length ; i++ )
+          {
+            if(data[i]!=null) $("#FF").append('<tr><td>' + data[i].name + '</td><td>' + data[i].desc + '</td></tr>');
+          }
+          receivedFF = true;
+        }
+        else
+        {
+          console.log("Not applying FF, because I already have them");
+        }
+      });
+
+
+      socket.on('statChange'+'<%=data.player%>', function(data){
+        console.log('received statChange.');
+        console.log(data);
+
+        var props = ["HP", "AHP", "H", "B", "LA", "RA", "LL", "RL", "AH", "AB", "ALA", "ARA", "ALL", "ARL", "sanity", "fear", "stress", "strain", "karma", "curse", "weight", "weightM"];
+        console.log(data["H"]);
+        for(var a=0 ; a<props.length ; a++)
+        {
+          if(data[props[a]]!=undefined && data[props[a]]!="0")
+          {
+              $("#"+props[a]).html(data[props[a]]=="00"?"0":data[props[a]]);
+          }
+        }
+      });
+
+      socket.on('invChange'+'<%=data.player%>', function(data){
+        console.log("received an invChange");
+        console.log(data);
+        $('#inventory').append('<tr><td>' + data.itemName + '</td><td>' + data.itemDamage + '</td><td>' + data.itemWeight + '</td></tr>');
+        $("#weight").html(data.weight);
+      });
+  </script>
+
+  <style>
+    img{width:100%; height:auto;}
+    div{text-align:center;}
+    .big{font-size:18px;}
+    .bigger{font-size:34px}
+  </style>
+
+  <body>
+    <table>
+      <td>
+        <div style="position:relative; text-align:center;">
+          <img src="/public/assets/charactersheet-1.jpg" width="2476">
+
+          <!-- top ailments !-->
+          <div class="big" style="position:absolute; left:12%; top:15.2%;"><b id="fear"><%=data.fear%>/5</b></div>
+          <div class="big" style="position:absolute; left:12%; top:18.2%;"><b id="stress"><%=data.stress%>/5</b></div>
+          <div class="big" style="position:absolute; left:12%; top:21.4%;"><b id="strain"><%=data.strain%>/5</b></div>
+          <div class="big" style="position:absolute; left:26.85%; top:15.2%;"><b id="karma"><%=data.karma%>/5</b></div>
+          <div class="big" style="position:absolute; left:26.85%; top:18.4%;"><b id="curse"><%=data.curse%>/5</b></div>
+
+          <!-- stats !-->
+          <div class="big" style="position:absolute; left:23.5%; top:24.2%;"><b id="might"><%=data.might%></b></div>
+          <div class="big" style="position:absolute; left:23.5%; top:29.9%;"><b id="agility"><%=data.agility%></b></div>
+          <div class="big" style="position:absolute; left:23.5%; top:35.3%;"><b id="vitality"><%=data.vitality%></b></div>
+          <div class="big" style="position:absolute; left:23.5%; top:40.9%;"><b id="smarts"><%=data.smarts%></b></div>
+          <div class="big" style="position:absolute; left:23.5%; top:46.5%;"><b id="experience"><%=data.experience%></b></div>
+          <div class="big" style="position:absolute; left:23.5%; top:52%;"><b id="influence"><%=data.influence%></b></div>
+
+          <!-- name and class !-->
+          <div class="big" style="position:absolute; left:18.5%; top:55.7%;"><%=data.playerName%></div>
+          <div class="bigger" style="position:absolute; left:26.3%; top:87%;"><%=data.class%></div>
+
+          <!-- limbs !-->
+          <div class="bigger" style="position:absolute; left:51.8%; top:15.6%;"><b id="H"><%=data.H%></b></div>
+          <div class="bigger" style="position:absolute; left:46.3%; top:34.3%;"><b id="B"><%=data.B%></b></div>
+          <div class="bigger" style="position:absolute; left:59.7%; top:49.7%;"><b id="LA"><%=data.LA%></b></div>
+          <div class="bigger" style="position:absolute; left:36.5%; top:49.2%;"><b id="RA"><%=data.RA%></b></div>
+          <div class="bigger" style="position:absolute; left:58.2%; top:79.8%;"><b id="LL"><%=data.LL%></b></div>
+          <div class="bigger" style="position:absolute; left:37.4%; top:81.65%;"><b id="RL"><%=data.RL%></b></div>
+
+          <!-- armor !-->
+          <div class="bigger" style="position:absolute; left:59.1%; top:15.5%;"><b id="AH"><%=data.AH%></b></div>
+          <div class="bigger" style="position:absolute; left:53.45%; top:34.2%;"><b id="AB"><%=data.AB%></b></div>
+          <div class="bigger" style="position:absolute; left:65.7%; top:49.1%;"><b id="ALA"><%=data.ALA%></b></div>
+          <div class="bigger" style="position:absolute; left:42.5%; top:49%;"><b id="ARA"><%=data.ARA%></b></div>
+          <div class="bigger" style="position:absolute; left:64.3%; top:79.5%;"><b id="ALL"><%=data.ALL%></b></div>
+          <div class="bigger" style="position:absolute; left:43.5%; top:81%;"><b id="ARL"><%=data.ARL%></b></div>
+
+          <!-- sanity, health and armor!-->
+          <div class="bigger" style="position:absolute; left:77.6%; top:25.7%;"><b id="sanity"><%=data.sanity%></b>/<b id="sanityM"><%=data.sanityM%></b></div>
+          <div class="bigger" style="position:absolute; left:78.5%; top:53.9%;"><b id="HP"><%=data.HP%></b>/<b id="HPM"><%=data.HPM%></b></div>
+          <div class="bigger" style="position:absolute; left:81%; top:81.8%;"><b id="AHP"><%=data.AP%></b></div>
+
+      </td>
+    </table>
+
+
+      <h3>Peso: <b id="weight"><%=data.weight%></b>/<b><%=data.weightM%></b></h3>
+      <table id="inventory" align="center">
+        <tr>
+          <th>Oggetto</th>
+          <th>Danno</th>
+          <th>Peso</th>
+        </tr>
+      </table>
+
+      <br><br><br>
+
+      <h3>Pregi e Difetti:</h3>
+      <table id="FF" align="center" class="FF">
+        <tr>
+          <th>Nome</th>
+          <th>Descrizione</th>
+        </tr>
+      </table>
+
+    </div>
+  </body>
+</html>

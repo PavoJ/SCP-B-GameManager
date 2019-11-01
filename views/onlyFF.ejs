@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script type="text/javascript">
+    var socket = io();
+
+    var receivedFF = false;
+
+    socket.emit("F&F_req");
+    socket.on("F&F", function(feats, flaws){
+      if(!receivedFF)
+      {
+        console.log("received F&F");
+        for(var i=0 ; i<feats.length ; i++) $("#Feats").append('<tr><td class="fof">' + feats[i].name + '</td><td class="desc">' + feats[i].desc + '</td><td class="req">' + feats[i].req + '</td></tr>');
+        for(var i=0 ; i<flaws.length ; i++) $("#Flaws").append('<tr><td class="fof">' + flaws[i].name + '</td><td class="desc">' + flaws[i].desc + '</td><td class="req">' + flaws[i].req + '</td></tr>');
+        receivedFF=true;
+      }
+    });
+  </script>
+
+  <body>
+    <table id="Feats">
+      <tr>
+        <th class="fof">Pregio</th>
+        <th class="desc">Descrizione</th>
+        <th class="req">requisiti</th>
+      </tr>
+    </table>
+    <br><br><br><br><br><br>
+    <table id="Flaws">
+      <tr>
+        <th class="fof">Difetto</th>
+        <th class="desc">Descrizione</th>
+        <th class="req">requisiti</th>
+      </tr>
+    </table>
+  </body>
+</html>

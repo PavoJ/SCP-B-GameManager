@@ -1,0 +1,535 @@
+{"f":[
+
+  {
+    "name":"Dipendenza da Caffeina (-1)",
+    "desc":"Hai bisogno di caffeina una volta al giorno. Una volta ottenuta hai +1 ai tiri di smarts per un ora. Se non ottieni caffeina ogni 24 ore cominci ad avere -1 ai tiri di smarts.",
+    "req":"Vit>9",
+    "cost":-1
+  },
+
+  {
+    "name":"Dipendenza da Alcol (-2)",
+    "desc":"Hai bisogno di alcol una volta al giorno. Una volta ottenuta hai -1 ai tiri di experience per un ora. Se non ottieni Alcol ogni 24 ore cominci ad avere -1 ai tiri di agility e might.",
+    "req":"Vit>9",
+    "cost":-2
+  },
+
+  {
+    "name":"Dipendenza da Sigarette(-3)",
+    "desc":"Hai bisogno di sigarette una volta al giorno. Se non la fumi almeno una volta ogni 24 ore cominci ad avere -2 ai tiri di agility e might.",
+    "req":"Vit>9",
+    "cost":-3
+  },
+
+  {
+    "name":"Dipendenza da Marijuana (-4)",
+    "desc":"Hai bisogno di Marijuana una volta al giorno. Una volta ottenuta hai -2 ai tiri di experience e smarts per un ora. Se non la fumi almeno una volta ogni 24 ore cominci ad avere -3 ai tiri di agility e might.",
+    "req":"Vit>9",
+    "cost":-4
+  },
+
+  {
+    "name":"Dipendenza da Eroina (-5)",
+    "desc":"Hai bisogno di eroina una volta al giorno. Una volta ottenuta hai -4 ai tiri di experience per due ore. Se non la assumi ogni 24 ore cominci ad avere -6 ai tiri di agility e might.",
+    "req":"Vit>9",
+    "cost":-5
+  },
+
+  {
+    "name":"Allergie (-2)",
+    "desc":"Hai un allergia casuale, che quando manifestata ti causa -2 ai tiri di might e vitality.",
+    "req":"Vit>13",
+    "cost":-2
+  },
+
+  {
+    "name":"Distaccato (-2)",
+    "desc":"-2 Ai tiri di influence con chi ha uno smarts superiore al tuo.",
+    "req":"Smarts<7",
+    "cost":-2
+  },
+
+  {
+    "name":"Amnesia (-2)",
+    "desc":"Hai 1 difetto ma non ti ricordi qual è, questo difetto lo scoprirai lungo la tua avventura.",
+    "req":"Exp>14",
+    "cost":-2
+  },
+
+  {
+    "name":"Amnesia (-4)",
+    "desc":"Hai 2 difetti ma non ti ricordi quali sono, questi difetti li scoprirai lungo la tua avventura.",
+    "req":"Exp>14",
+    "cost":-4
+  },
+
+  {
+    "name":"Amnesia (-6)",
+    "desc":"Hai 3 difetti ma non ti ricordi quali sono, questi difetti li scoprirai lungo la tua avventura.",
+    "req":"Exp>14",
+    "cost":-6
+  },
+
+  {
+    "name":"Cattiva Salute (-2)",
+    "desc":"Ti ammali più frequentemente, e ci metti il doppio a curarti di queste malattie.",
+    "req":"Vit>14",
+    "cost":-2
+  },
+
+  {
+    "name":"Karma Cattivo (-2)",
+    "desc":"Prendi il doppio dei punti maledizione, e la metà dei punti karma.",
+    "req":"Influence>11 O Exp>11",
+    "cost":-2
+  },
+
+  {
+    "name":"Cattiva Reputazione (-2)",
+    "desc":"-2 ai tiri di influence con altri umani.",
+    "req":"Influence>13",
+    "cost":-2
+  },
+
+  {
+    "name":"Cieco (-4)",
+    "desc":"Fallisci tutti i tiri che riguardano la vista.",
+    "req":"",
+    "cost":-4
+  },
+
+  {
+    "name":"Mani Insanguinate (-1)",
+    "desc":"Ogni volta che tenti di fare un'azione delicata, hai 1/2 di probabilità di usare la forza bruta per sbaglio.",
+    "req":"Might<9",
+    "cost":-1
+  },
+
+  {
+    "name":"Marcato (-1)",
+    "desc":"Sei un criminale molto conosciuto.",
+    "req":"Classe D",
+    "cost":-1
+  },
+
+  {
+    "name":"Invidia (-2)",
+    "desc":"Sei invidiato da tutte le persone che hai attorno. Se tiri 1-3 in influence il bersaglio diventa ostile.",
+    "req":"Influence<8",
+    "cost":-2
+  },
+
+  {
+    "name":"Ossessione (-1)",
+    "desc":"Rischi che qualcuno si ossessioni a te se tiri 1-3 in influence.",
+    "req":"Influence<8",
+    "cost":-1
+  },
+
+  {
+    "name":"1 Arti Rotti (-2)",
+    "desc":"-3 ai tiri quando usi un arto rotto, e +2 a fatica",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"2 Arti Rotti (-3)",
+    "desc":"-3 ai tiri quando usi un arto rotto, e +2 a fatica",
+    "req":"",
+    "cost":-3
+  },
+
+  {
+    "name":"3 Arti Rotti (-4)",
+    "desc":"-3 ai tiri quando usi un arto rotto, e +2 a fatica",
+    "req":"",
+    "cost":-4
+  },
+
+  {
+    "name":"4 Arti Rotti (-5)",
+    "desc":"-3 ai tiri quando usi un arto rotto, e +2 a fatica",
+    "req":"",
+    "cost":-5
+  },
+
+  {
+    "name":"Corpo Fragile (-1)",
+    "desc":"Prendi danno bonus se vieni colpito ripetutamente nello stesso punto.",
+    "req":"Might>12",
+    "cost":-1
+  },
+
+  {
+    "name":"Ficcanaso (-1)",
+    "desc":"Se una persona fallisce un'azione, ti metti a monologare sul come avrebbe dovuto fare per evitare il fallimento, causando -3 al loro tiro per distrazione.",
+    "req":"Exp<8",
+    "cost":-1
+  },
+
+  {
+    "name":"Negligente (-2)",
+    "desc":"-2 ai tiri quando cerchi di creare qualcosa, e una volta per partita fallisci nel creare una trappola.",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Cauto (-1)",
+    "desc":"Ci metti il doppio del tempo per fare qualsiasi azione, -2 ai tiri di iniziativa.",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Passato da Classe E (-4)",
+    "desc":"Sei stato esposto a degli effetti da un scp in precedenza, ma nessuno lo sa (a parte te, in alcune occasioni).",
+    "req":"Classe D, C, B",
+    "cost":-4
+  },
+
+  {
+    "name":"Sbadatezza (-2)",
+    "desc":"Una volta per sessione fallisci automaticamente in un momento cruciale, data la tua sbadatezza. -1 ai tiri su Might e Agility",
+    "req":"Agi>12",
+    "cost":-2
+  },
+
+  {
+    "name":"Daltonico (-1)",
+    "desc":"Vedi tutto in bianco e nero.",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Onestà Cronica (-2)",
+    "desc":"Non sei in grado di mentire. In caso di vita o di morte dove puoi salvarti con una bugia, fai un tiro con -3 influence, e se ci riesci soffri una penalità che dura 1D4 ore per sensi di colpa.",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Codardo (-2)",
+    "desc":"Fuggi da tutti i potenziali pericoli.",
+    "req":"Cauto",
+    "cost":-2
+  },
+
+  {
+    "name":"Curiosità (-2)",
+    "desc":"Una volta per sessione senti l'obbligo di investigare lo sconosciuto, di solito con risultati negativi. -2 ai tiri di influence se sedotto o condotto verso una trappola se la curiosità ha la meglio su di te.",
+    "req":"Smarts<10",
+    "cost":-2
+  },
+
+  {
+    "name":"Famiglia Maledetta (-1)",
+    "desc":"Inizi il gioco con un punto di maledizione. Questo punto non viene consumato se utilizzato dal GM.",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Famiglia Maledetta (-2)",
+    "desc":"Inizi il gioco con due punti di maledizione. Questi punti non vengono consumati se usati dal GM.",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Sordità (-3)",
+    "desc":"",
+    "req":"",
+    "cost":-3
+  },
+
+  {
+    "name":"Dormiglione (-1)",
+    "desc":"Ti svegliano solo i rumori forti, o se sei fisicamente scosso. Anche dopo esserti svegliato, rimano stordito per 1D4 round.",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Esausto Facilmente (-2)",
+    "desc":"Ti stanchi il doppio del normale.",
+    "req":"Might>11 O Vit>11",
+    "cost":-2
+  },
+
+  {
+    "name":"Fanatico (-2)",
+    "desc":"Sei ossessionato ad una religione, che può includere un SCP o una persona come divinità. Hai -5 sui tiri che vanno contro questa religione.",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Scheletro Fragile (-2)",
+    "desc":"Danni ripetitivi fanno il doppio del danno e tolgono 1 di vita da ogni parte del corpo.",
+    "req":"Might>11, Vit>11",
+    "cost":-2
+  },
+
+  {
+    "name":"disturbo d'ansia generalizzato (-4)",
+    "desc":"Tremi frequentemente. -3 ai tiri di Agility, Might, e Vitality.",
+    "req":"",
+    "cost":-4
+  },
+
+  {
+    "name":"Iperattività (-1)",
+    "desc":"Tutti gli skill check hanno -1.",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Paura della Fine (-2)",
+    "desc":"Tutti gli attacchi e gli skill check hanno -2.",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Paranoia (-3)",
+    "desc":"-3 ai tiri di smarts, experience influence.",
+    "req":"",
+    "cost":-3
+  },
+
+  {
+    "name":"Affamato di Gloria (-2)",
+    "desc":"Ti butti sempre nei combattimenti, anche se sei sicuro di non poterci riuscire. Continui a combattere a meno che non raggiungi il livello 2 di stress e fallisci un tiro all'experience.",
+    "req":"Exp>13",
+    "cost":-2
+  },
+
+  {
+    "name":"Avido (-1)",
+    "desc":"Sei molto avido e prendi sempre opportunità per ottenere bottino. Non sei in grado di condividere, ma puoi tentare un tiro all'experience (guadagnando 2 stress) per fare eccezioni.",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Poco attento (-2)",
+    "desc":"Hai poca concentrazione, e rischi di non essere in grado di portare a termine molte azioni.",
+    "req":"Smarts>11",
+    "cost":-2
+  },
+
+  {
+    "name":"Indeciso (-2)",
+    "desc":"Ci metti molto a fare una decisione",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Arto Ferito (-1)",
+    "desc":"-1 ai tiri se usi un arto ferito",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"3 Arti Feriti (-2)",
+    "desc":"-1 ai tiri se usi un arto ferito",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Insonne (-1)",
+    "desc":"Riesci raramente a dormire le ore necessarie per ricoverare completamente vita e sanità.",
+    "req":"Vit>10",
+    "cost":-1
+  },
+
+  {
+    "name":"Intollerante (-1)",
+    "desc":"Odi una razza, un animale o una situazione particolare. -4 ai tiri quando hai a che fare con quella cosa",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Saltare a Conclusioni (-1)",
+    "desc":"Salti frequentemente a conclusioni",
+    "req":"Exp>12",
+    "cost":-1
+  },
+
+  {
+    "name":"Pigro (-2)",
+    "desc":"Non fai cose a meno che non sono strettamente necessarie",
+    "req":"Vit>12",
+    "cost":-2
+  },
+
+  {
+    "name":"Lascivo (-1)",
+    "desc":"Cadi a tentazioni seduttive una volta per sessione",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Arto Amputato (-4)",
+    "desc":"Ti manca un arto",
+    "req":"",
+    "cost":-4
+  },
+
+  {
+    "name":"Arto Amputato (-6)",
+    "desc":"Ti mancano due arti",
+    "req":"",
+    "cost":-6
+  },
+
+  {
+    "name":"Arto Amputato (-8)",
+    "desc":"Ti mancano tre arti",
+    "req":"",
+    "cost":-4
+  },
+
+  {
+    "name":"Arto Amputato (-10)",
+    "desc":"Ti mancano tutti gli arti",
+    "req":"",
+    "cost":-10
+  },
+
+  {
+    "name":"Depressione (-2)",
+    "desc":"Pensieri suicida, continua stanchezza e fiacchezza, e sensazioni di inutilità o di pentimento. -2 ai tiri di attacco, salvataggio, e check in generale. Puoi sopprimere questo difetto con droga o alcool, o spendendo 1 punto di stress",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Mania (-2)",
+    "desc":"Sei sempre euforico o irritato in qualche modo. -2 ai tiri di attacco, salvataggi e check in generale. Puoi sopprimere questo difetto con droga o alcool, o spendendo 1 punto di stress",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Bipolare (-4)",
+    "desc":"Oscilli casualmente tra stati emotivi, -3 a tutti i tiri. Puoi spendere 2 stress per rimuovere temporaneamente gli effetti negativi",
+    "req":"",
+    "cost":-4
+  },
+
+  {
+    "name":"Codice Morale: Cortesia Cavalleresca (-2)",
+    "desc":"Odi ferire creature del sesso opposto. -3 sui tiri di attacco su creature dove puoi essere sicuro che sono del sesso opposto",
+    "req":"Inf<10",
+    "cost":-2
+  },
+
+  {
+    "name":"Codice Morale: Armi (-2)",
+    "desc":"Odi ferire nemici non armati. -3 sui tiri di attacco su nemici che sono non sono armati, a meno che non ti attaccano loro prima",
+    "req":"Inf<10",
+    "cost":-2
+  },
+
+  {
+    "name":"Codice Morale: Duello (-2)",
+    "desc":"Sei abituato a combattere nemici solo se hanno intenzione di attaccarti, o ti hanno già attaccato. -3 sui tiri di attacco contro nemici che non hanno intenzione di attaccarti",
+    "req":"Inf<10",
+    "cost":-2
+  },
+
+  {
+    "name":"Codice Morale: Guardami in faccia (-2)",
+    "desc":"Preferisci combattere faccia a faccia. -3 sui tiri di attacco da dietro",
+    "req":"Inf<10",
+    "cost":-2
+  },
+
+  {
+    "name":"Muto (-2)",
+    "desc":"Puoi solo comunicare con lo scritto o con il pregio del linguaggio dei segni",
+    "req":"",
+    "cost":-2
+  },
+
+  {
+    "name":"Cecità Notturna (-1)",
+    "desc":"Sei cieco nel buio",
+    "req":"Agi<11",
+    "cost":-1
+  },
+
+  {
+    "name":"Incubi (-1)",
+    "desc":"Hai incubi quando dormi, e 1/4 di possibilità per avere -1 a tutti i tiri per il resto della giornata",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Obesità (-2)",
+    "desc":"-3 a tutti i tiri che richiedono attività fisica",
+    "req":"Might>12, Agi>14, Fuori Forma",
+    "cost":-2
+  },
+
+  {
+    "name":"Ossessioni (-3)",
+    "desc":"Sei ossessionato ad un idea o immagine. -2 ai tiri durante momenti di stress. Puoi pagare 1 stress per negare gli effetti per 10 minuti",
+    "req":"",
+    "cost":-3
+  },
+
+  {
+    "name":"Compulsioni (-5)",
+    "desc":"Provi un obbligo ad eseguire azioni inutili, questo effetto può apparire in qualsiasi momento e durare 1D10 round. Puoi evitare gli effetti per 10 minuti pagando 2 di stress",
+    "req":"",
+    "cost":-5
+  },
+
+  {
+    "name":"Senza occhio (-1)",
+    "desc":"Ti manca un occhio, quindi hai -2 sui tiri che richiedono percezione di profondità",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Fuori Forma (-1)",
+    "desc":"-1 a tutti i tiri che richiedono attività fisica",
+    "req":"Agi<12",
+    "cost":-1
+  },
+
+  {
+    "name":"Autostima eccessiva (-2)",
+    "desc":"Una volta per sessione farai un'attività che supera le tue capacità",
+    "req":"Inf>10",
+    "cost":-2
+  },
+
+  {
+    "name":"Pacifista (-1)",
+    "desc":"Non sei in grado di uccidere nessuno. Puoi solo attaccare se è per autodifesa, e se il tuo attacco non è letale",
+    "req":"",
+    "cost":-1
+  },
+
+  {
+    "name":"Festaiolo (-1)",
+    "desc":"Una volta per sessione cedi alle gioie facili per entrare in o organizzare una festa. -3 ai tiri di difesa contro la seduzione se ha a che fare con una festa",
+    "req":"Vit<10",
+    "cost":-1
+  }
+
+]}

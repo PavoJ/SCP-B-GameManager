@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SCP - Breakout</title>
+  </head>
+  <body>
+    <%include ./partials/nav.ejs%>
+
+    <h1>Benvenuto</h1>
+    <p>grazie per aver scelto di lavorare con noi. Siamo grati ad averti nella nostra sede a <b id="redacted">redacted</b><br></p>
+    <p>Per i prigionieri che compilano questo modulo, qualsiasi manifestazione di ribellione o di scarsa cooperazione verrà trattata con immediata terminazione</p>
+
+    <form id="contact-form" action="/F&F" method="post">
+
+      <label for="playerName">Nome del giocatore:</label>
+      <input type="text" name="playerName" value="" id="txt" maxlength="20">
+
+      <br>
+
+      <label for="class">Classe del giocatore:</label>
+      <select class="" name="class">
+        <optgroup label="Classe E">
+          <option value="E">Agente sul Campo</option>
+        </optgroup>
+        <optgroup label="Classe D">
+          <option value="D">Prigioniero</option>
+        </optgroup>
+        <optgroup label="Classe C">
+          <option value="Cr">Ricercatore</option>
+          <option value="Cso">Ufficiale di Sicurezza</option>
+        </optgroup>
+        <optgroup label="Classe B">
+          <option value="Btro">Ufficiale a Risposta Tattica</option>
+          <option value="Bcs">Specialista di Contenimento</option>
+        </optgroup>
+        <optgroup label="Classe A">
+          <option value="A">Direttore del Sito</option>
+        </optgroup>
+      </select>
+
+      <br><br>
+
+      <label>Inserisci i seguenti attributi:</label>
+      <br>
+      <label for="might">Might: La tua forza fisica, determina anche quante cose riesci a trasportare alla volta:</label>
+      <input type="number" name="might" value=10 class="num" maxlength="2">
+      <br>
+      <label for="agility">Agility: La tua agilità nel far le cose:</label>
+      <input type="number" name="agility" value=10 class="num" maxlength="2">
+      <br>
+      <label for="vitality">Vitality: lo stato della tua salute, e la tua resistenza per malattie:</label>
+      <input type="number" name="vitality" value=10 class="num" maxlength="2">
+      <br>
+      <label for="smarts">Smarts: La tua abilità nel risolvere i problemi:</label>
+      <input type="number" name="smarts" value=10 class="num" maxlength="2">
+      <br>
+      <label for="experience">Experience: La tua esperienza sul campo:</label>
+      <input type="number" name="experience" value=10 class="num" maxlength="2">
+      <br>
+      <label for="influence">Influence: Il tuo carisma, la tua abilità di parlare con altri individui:</label>
+      <input type="number" name="influence" value=10 class="num" maxlength="2">
+
+      <br><br><br>
+      <input type="submit" name="" value="continua" style="font-size:40px;">
+
+    </form>
+  </body>
+</html>

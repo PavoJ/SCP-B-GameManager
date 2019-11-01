@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GM</title>
+    <%include ./partials/nav.ejs%>
+  </head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    var socket = io();
+    var playerData = {};
+
+    socket.emit("invReq", <%=playerNum%>);
+
+    socket.emit('playerList');
+    socket.on('playerInfo', function(pd){
+      playerData = pd;
+      console.log('playerData received.');
+      for(i = 0 ; i<playerData.length ; ++i)
+      {
+        var a = +playerData[i].player-1;
+        $('#IplayerList').append('<option value="' + a + '">' + playerData[i].playerName + '</option>');
+        $('#IIplayerList').append('<option value="' + a + '">' + playerData[i].playerName + '</option>');
+        $('#IIIplayerList').append('<option value="' + a + '">' + playerData[i].playerName + '</option>');
+        console.log('<option value="' + a + '">' + playerData[i].playerName + '</option>')
+      }
+    });
+  </script>
+  <body>
+    <form action="/GM/playerMod" method="post">
+      <table align="center">
+        <tr>
+          <th><select id="IplayerList" name="playerNum"></select></th>
+          <th><input type="submit" value="Modifica" style="font-size:15px;"></th>
+        </tr>
+      </table>
+    </form>
+    <br><br>
+    <form action="/GM/invMod" method="post">
+      <table align="center">
+        <tr>
+          <td><select id="IIplayerList" name="playerNum"></td>
+        </tr>
+        <tr>
+          <table id="inventory" align="center">
+            <tr>
+              <th>Oggetto</th>
+              <th>Danno</th>
+              <th>Peso</th>
+            </tr>
+            <tr>
+              <td><input type="text" name="itemName"></input></td>
+              <td><input type="text" name="itemDamage"></input></td>
+              <td><input type="number" name="itemWeight"></input></td>
+            </tr>
+          </table>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Modifica" style="font-size:15px;"></td>
+        </tr>
+      </table>
+    </form>
+    <br><br><br>
+    <form action="/GM/invGet" method="post">
+      <table align="center">
+        <tr>
+          <th><select id="IIIplayerList" name="playerNum"></select></th>
+          <th><input type="submit" value="Modifica Inventario" style="font-size:15px;"></th>
+        </tr>
+      </table>
+    </form>
+    <br><br><br>
+    <table>
+      <tr>
+        <form action="/saveGame" method="post">
+          <table align="center">
+            <th><input type="text" name="data"></th>
+            <th><input type="submit" value="Salva"></th>
+          </table>
+        </form>
+      </tr>
+      <br><br>
+      <tr>
+        <td>
+          <form action="/loadGame" method="post">
+            <table align="center">
+              <th><input type="text" name="data"></th>
+              <th><input type="submit" value="Carica"></th>
+            </table>
+          </form>
+        </td>
+      </tr>
+    </table>
+
+
+  </body>
+</html>

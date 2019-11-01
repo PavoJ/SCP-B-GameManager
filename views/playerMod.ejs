@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Modifica di <%=data.playerName%></title>
+    <%include ./partials/nav.ejs%>
+  </head>
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+      var socket = io();
+      socket.emit("invReq", <%=data.player%>);
+      socket.on("inv"+'<%=data.player%>', function(data){
+        console.log('Received the inv');
+        $("#inventory").empty();
+        $("#inventory").append("<tr><th>Oggetto</th><th>Danno</th><th>Peso</th></tr>");
+
+        for(var i=0 ; i<data.length ; i++)
+        {
+          if(data[i]!=undefined) $("#inventory").append('<tr><td><input type="checkbox" name="' + i + '"></td><td>' + data[i].name + '</td><td>' + data[i].damage + '</td><td>' + data[i].weight + '</td></tr>');
+        }     
+      });
+
+      var receivedFF = false;
+
+      socket.emit("FFReq", <%=data.player%>);
+      socket.on("FF"+'<%=data.player%>', function(data)
+      {
+        console.log("Received Feats & Flaws")
+        if(!receivedFF)
+        {
+          for( var i=0 ; i<data.length ; i++ ) if(data[i]!=null)
+          {
+            $("#FF").append('<tr><td>' + data[i].name + '</td><td>' + data[i].desc + '</td><td>' + data[i].req + '</td></tr>');
+          }
+          receivedFF = true;
+        }
+        else
+        {
+          console.log("Not applying FF, because I already have them");
+        }
+      });
+
+    </script>
+
+    <form action="/GM" method="post">
+      <h2>Statistiche di <%=data.playerName%></h2>
+      <label for="player">Numero del giocatore:</label>
+      <input type="number" name="player" class="num" value="<%=data.player%>">
+      <h3>Vita: <b><%=data.HP%></b>/<b><%=data.HPM%></b></h3>
+      <ul>
+        <li>Testa: <b><input type="number" name="H" value="<%=data.H%>" class="num"></b>/<b id="hMHP"><%=data.MH%></b></li>
+        <li>Corpo: <b><input type="number" name="B" value="<%=data.B%>" class="num"></b>/<b id="bMHP"><%=data.MB%></b></li>
+        <li>Braccio Sinistro: <b><input type="number" name="LA" value="<%=data.LA%>" class="num"></b>/<b id="raMHP"><%=data.MA%></b></li>
+        <li>Braccio Destro: <b><input type="number" name="RA" value="<%=data.RA%>" class="num"></b>/<b id="raMHP"><%=data.MA%></b></li>
+        <li>Gamba Sinistra: <b><input type="number" name="LL" value="<%=data.LL%>" class="num"></b>/<b id="raMHP"><%=data.ML%></b></li>
+        <li>Gamba Destra: <b><input type="number" name="RL" value="<%=data.RL%>" class="num"></b>/<b id="raMHP"><%=data.ML%></b></li>
+      </ul>
+      <h3>Armatura: <b><%=+data.AH+data.AB+data.ARA*2+data.ARL*2%></b></h3>
+      <ul>
+        <li>Testa: <b><input type="number" name="AH" value="<%=data.AH%>" class="num"></b></li>
+        <li>Corpo: <b><input type="number" name="AB" value="<%=data.AB%>" class="num"></b></li>
+        <li>Braccio Sinistro: <b><input type="number" name="ALA" value="<%=data.ALA%>" class="num"></b>/<b id="laMHP"><%=data.MA%></b></li>
+        <li>Braccio Destro: <b><input type="number" name="ARA" value="<%=data.ARA%>" class="num"></b>/<b id="raMHP"><%=data.MA%></b></li>
+        <li>Gamba Sinistra: <b><input type="number" name="ALL" value="<%=data.ALL%>" class="num"></b>/<b id="raMHP"><%=data.ML%></b></li>
+        <li>Gamba Destra: <b><input type="number" name="ARL" value="<%=data.ARL%>" class="num"></b>/<b id="rlMHP"><%=data.ML%></b></li>
+      </ul>
+
+      <h3>Sanità Mentale: <b><input type="number" name="sanity" value="<%=data.sanity%>" class="num"></b>/<b><%=data.sanityM%></b></h3>
+
+      <ul>
+        <li>Paura: <b><input type="number" name="fear" value="<%=data.fear%>" class="num">/5</b></li>
+        <li>Stress: <b><input type="number" name="stress" value="<%=data.stress%>" class="num">/5</b></li>
+        <li>Fatica: <b><input type="number" name="strain" value="<%=data.strain%>" class="num">/5</b></li>
+        <li>Karma: <b><input type="number" name="karma" value="<%=data.karma%>" class="num">/5</b></li>
+        <li>Maledizione: <b><input type="number" name="curse" value="<%=data.curse%>" class="num">/5</b></li>
+      </ul>
+
+      <h3>Peso: <b id="weight"><%=data.weight%></b>/<b><%=data.weightM%></b></h3>
+
+      <ul>
+        <li><b id="might">Might: <%=data.might%></b></li>
+        <li><b id="agility">Agility: <%=data.agility%></b></li>
+        <li><b id="vitality">Vitality: <%=data.vitality%></b></li>
+        <li><b id="smarts">Smarts: <%=data.smarts%></b></li>
+        <li><b id="experience">Experience: <%=data.experience%></b></li>
+        <li><b id="influence">Influence: <%=data.influence%></b></li>
+      </ul>
+
+      <table id="inventory" align="center">
+      </table>
+
+      <br><br><br>
+
+      <h3>Pregi e Difetti:</h3>
+      <table id="FF" class="FF" align="center">
+        <tr>
+          <th>Nome</th>
+          <th>Descrizione</th>
+          <th>Requisiti</th>
+        </tr>
+      </table>
+      <br><br>
+      <input type="submit" value="Applica" style="font-size:40px;">
+    </form>
+  </body>
+</html>
