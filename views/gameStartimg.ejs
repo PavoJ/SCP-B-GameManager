@@ -49,12 +49,20 @@
         console.log(data);
 
         var props = ["HP", "AHP", "H", "B", "LA", "RA", "LL", "RL", "AH", "AB", "ALA", "ARA", "ALL", "ARL", "sanity", "fear", "stress", "strain", "karma", "curse", "weight", "weightM"];
-        console.log(data["H"]);
+        var stat;
         for(var a=0 ; a<props.length ; a++)
         {
           if(data[props[a]]!=undefined && data[props[a]]!="0")
           {
-              $("#"+props[a]).html(data[props[a]]=="00"?"0":data[props[a]]);
+            if(data[props[a]][0] == "0" && data[props[a]][1] == "0")
+            {
+              stat = 0;
+            }
+            else if((data[props[a]][0] == "0" && data[props[a]][1] != "0") || (data[props[a]][0] == "-" && data[props[a]][1] == "0"))
+            {
+              stat = Number(document.getElementById(props[a]).innerHTML)+Number(data[props[a]]);
+            }
+            $("#"+props[a]).html(stat);
           }
         }
       });

@@ -13,7 +13,7 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 var Feats = fileParse.jsonConvert('./Feats.json').f;
 var Flaws = fileParse.jsonConvert('./Flaws.json').f;
 
-var playerData = [];
+var playerData = {};
 var playerCount = 0;
 var tempChar;
 
@@ -128,11 +128,10 @@ app.get("/relog/:user", function(req, res){//riconnessione
 
 app.post('/GM', urlencodedParser, function(req, res){//modifica informazioni personaggio
 
-  var props = ["HP", "AHP", "H", "B", "LA", "RA", "LL", "RL", "AH", "AB", "ALA", "ARA", "ALL", "ARL", "sanity", "fear", "stress", "strain", "karma", "curse", "weight", "weightM"];
+  var props = ["H", "B", "LA", "RA", "LL", "RL", "AH", "AB", "ALA", "ARA", "ALL", "ARL", "sanity", "fear", "stress", "strain", "karma", "curse", "weight", "weightM"];
   var container = {};
   var pNum;
   var el;
-  console.log(req.body.playerList);
   for(var b=0 ; b<props.length ; b++)
   {
     el = (req.body[props[b]]?req.body[props[b]]:undefined);
@@ -144,6 +143,24 @@ app.post('/GM', urlencodedParser, function(req, res){//modifica informazioni per
   for(var a=0 ; a<req.body.playerList.length ; a++)
   {
     pNum = req.body.playerList[a];
+
+    for(var b=0 ; b<props.length ; b++)
+    {
+      el = container[props[b]];
+      if(el!=undefined && el!="0")
+      {
+        console.log(props[b] + "=" + el);
+        if(el[0] == "0" && el[1] == "0")
+        {
+          playerData[pNum][props[b]] = 0;
+        }
+        else if((el[0] == "0" && el[1] != "0") || (el[0] == "-" && el[1] == "0"))
+        {
+          playerData[pNum][props[b]] = Number(playerData[pNum][props[b]])+Number(el);
+        }
+        console.log(props[b] + "=" + playerData[pNum][props[b]]);
+      }
+    }
 
     playerData[pNum].HP = (Number(container["H"]?container["H"]:playerData[pNum].H)+Number(container["B"]?container["B"]:playerData[pNum].B)+Number(container["RA"]?container["RA"]:playerData[pNum].RA)+Number(container["LA"]?container["LA"]:playerData[pNum].LA)+Number(container["RL"]?container["RL"]:playerData[pNum].RL)+Number(container["LL"]?container["LL"]:playerData[pNum].LL));
     playerData[pNum].AHP = (Number(container["AH"]?container["AH"]:playerData[pNum].AH)+Number(container["AB"]?container["AB"]:playerData[pNum].AB)+Number(container["ARA"]?container["ARA"]:playerData[pNum].ARA)+Number(container["ALA"]?container["ALA"]:playerData[pNum].ALA)+Number(container["ARL"]?container["ARL"]:playerData[pNum].ARL)+Number(container["ALL"]?container["ALL"]:playerData[pNum].ALL));
