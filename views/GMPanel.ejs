@@ -41,7 +41,7 @@
 
     <table>
       <tr>
-        <form action="/saveGame" method="post"></form>
+        <form action="/saveGame" method="post">
           <table align="center">
             <th><input type="text" name="data"></th>
             <th><input type="submit" value="Salva"></th>
@@ -129,11 +129,10 @@
           </table>
 
           <input form="invRm" id="invR" type="text" style="display:none;" name="playerNum">
-          <input form="invAdd" id="invA" type="text" name="playerNum" style="display:none;">
 
           <table align="center">
             <td><input form="invAdd" type="submit" value="Aggiungi" style="font-size:20px;"></td>
-            <td><input form="invRm" type="submit" value="Rimuovi" style="font-size:20px;"></td>
+            <td id="invRmB"><input form="invRm" type="submit" value="Rimuovi" style="font-size:20px;"></td>
           </table>
 
 
@@ -164,28 +163,38 @@
     var players = [];
     var playerMenu = document.getElementById('pMenu');
 
+    var receivedPD = false;;
+
     socket.emit('playerList');
     socket.on('playerInfo', function(pd){
-      playerData = pd;
-      console.log('playerData received.');
-      for(i = 0 ; i<playerData.length ; ++i)
+      if(!receivedPD)
       {
-        sel[i] = false;
-        var a = +playerData[i].player-1;
+        receivedPD = true;
+        playerData = pd;
+        console.log('playerData received.');
+        for(i = 0 ; i<playerData.length ; ++i)
+        {
+          sel[i] = false;
+          var a = +playerData[i].player-1;
 
-        $('#pList').append('<td class="gmListTable"><input type="checkbox" form="pMod" value="' + a + '" id="'+ a +'" name="playerList" class="gmP hide"><label class="gmList" for="' + a + '">[' + playerData[i].playerName + ']</label></td>');
+          $('#pList').append('<td class="gmListTable"><input type="checkbox" form="pMod" value="' + a + '" id="'+ a +'" name="playerList" class="gmP hide"><label class="gmList" for="' + a + '">[' + playerData[i].playerName + ']</label></td>');
+          $('#pList').append('<td class="gmListTable hide"><input type="checkbox" form="invAdd" value="' + a + '" id="i'+ a +'" name="playerList" class="gmP hide"></td>');
 
-        players[i] = document.getElementById(a);
+          players[i] = document.getElementById(a);
 
-        players[i].addEventListener("click", playerLis);
+          players[i].addEventListener("click", playerLis);
+        }
       }
     });
 
     function playerLis()
     {
+
       playerMenu.className = "";
       var pNum = Number(this["id"]);
       mSel = 0;//multiple selections
+
+      document.getElementById('i'+pNum).checked = !document.getElementById('i'+pNum).checked;
 
       console.log(sel[pNum]);
       sel[pNum] = !sel[pNum];
@@ -203,6 +212,7 @@
       switch(mSel)
       {
         case 0:{
+          document.getElementById("invRmB").className = "";
           socket.emit("invReq", (pNum+1));
           socket.on("inv"+(pNum+1), function(data){
             console.log('Received the inv');
@@ -244,6 +254,7 @@
           break;
         }
         case 1:{
+          document.getElementById("invRmB").className = "hide";
           $("#FF").empty();
           $("#inventory").empty();
           $("#inventory").append('<tr><td></td><td><input form="invAdd" type="text" name="itemName"></input></td><td><input form="invAdd" type="text" name="itemDamage"></input></td><td><input form="invAdd" type="number" name="itemWeight"></input></td></tr>');
@@ -262,8 +273,7 @@
         var HP = (Number(data.H)+Number(data.B)+Number(data.RA)+Number(data.LA)+Number(data.RL)+Number(data.LL));
         var AHP = (Number(data.AH)+Number(data.AB)+Number(data.ARA)+Number(data.ALA)+Number(data.ARL)+Number(data.ALL));
 
-        document.getElementById("invR").value = data.player||-1;
-        document.getElementById("invA").value = data.player-1||-1;
+        document.getElementById("invR").value = Number(data.player)-1;
 
         document.getElementById("playerNum").innerText = data.player||-1;
         document.getElementById("playerN").value = data.player||-1;

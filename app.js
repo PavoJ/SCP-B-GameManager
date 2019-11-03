@@ -103,18 +103,22 @@ app.post('/GM/playerMod', urlencodedParser, function(req, res){//trasferimento i
 });
 */
 
-app.post('/GM/invMod', urlencodedParser, function(req, res){//aggiunta di oggetti all'inventario
+app.post('/GM/invMod', urlencodedParser, function(req, res)//aggiunta di oggetti all'inventario
+{
+  var pList = req.body.playerList;
+  for(var a=0 ; a<pList.length ; a++)
+  {
+    playerData[pList[a]].inventory.push(JSON.parse('{"name":"' + req.body.itemName +'","damage":"' + req.body.itemDamage + '","weight":"' + req.body.itemWeight + '"}'));
 
-  playerData[req.body.playerNum].inventory.push(JSON.parse('{"name":"' + req.body.itemName +'","damage":"' + req.body.itemDamage + '","weight":"' + req.body.itemWeight + '"}'));
+    ++playerData[pList[a]].inventorySize;
 
-  ++playerData[req.body.playerNum].inventorySize;
+    playerData[pList[a]].weight+=Number(req.body.itemWeight);
+    console.log(playerData[pList[a]].weight);
+    req.body.weight = playerData[pList[a]].weight;
 
-  playerData[req.body.playerNum].weight+=Number(req.body.itemWeight);
-  console.log(playerData[req.body.playerNum].weight);
-  req.body.weight = playerData[req.body.playerNum].weight;
-
-  io.emit('invChange'+(Number(req.body.playerNum)+1), req.body);
-  console.log('invChange'+(Number(req.body.playerNum)+1) + ' sent.');
+    io.emit('invChange'+(Number(pList[a])+1), req.body);
+    console.log('invChange'+(Number(pList[a])+1) + ' sent.');
+  }
 
   res.render('GMPanel.ejs');
 });
@@ -132,6 +136,7 @@ app.post('/GM', urlencodedParser, function(req, res){//modifica informazioni per
   var container = {};
   var pNum;
   var el;
+
   for(var b=0 ; b<props.length ; b++)
   {
     el = (req.body[props[b]]?req.body[props[b]]:undefined);
@@ -157,6 +162,10 @@ app.post('/GM', urlencodedParser, function(req, res){//modifica informazioni per
         else if((el[0] == "0" && el[1] != "0") || (el[0] == "-" && el[1] == "0"))
         {
           playerData[pNum][props[b]] = Number(playerData[pNum][props[b]])+Number(el);
+        }
+        else
+        {
+            playerData[pNum][props[b]] = Number(el);
         }
         console.log(props[b] + "=" + playerData[pNum][props[b]]);
       }
@@ -191,12 +200,12 @@ app.post('/invRem', urlencodedParser, function(req, res)//per rimuovere un ogget
   {
     if(invRm[i]!='playerNum')
     {
-      playerData[Number(req.body.playerNum)-1].weight -= Number(playerData[Number(req.body.playerNum)-1].inventory[invRm[i]]['weight']);
+      playerData[Number(req.body.playerNum)].weight -= Number(playerData[Number(req.body.playerNum)].inventory[invRm[i]]['weight']);
 
-      delete playerData[Number(req.body.playerNum)-1].inventory[invRm[i]];
+      delete playerData[Number(req.body.playerNum)].inventory[invRm[i]];
     }
   }
-  io.emit("inv"+req.body.playerNum, playerData[Number(req.body.playerNum)-1].inventory, playerData[Number(req.body.playerNum)-1].weight);
+  io.emit("inv"+(Number(req.body.playerNum)+1), playerData[Number(req.body.playerNum)].inventory, playerData[Number(req.body.playerNum)].weight);
   res.render('GMPanel.ejs');
 });
 
@@ -205,6 +214,8 @@ app.post('/saveGame', urlencodedParser, function(req, res)//game saving
   console.log(playerData);
   fileParse.saveGame(req.body.data, JSON.stringify(playerData));
   console.log(playerData);
+
+  res.render("GMPanel.ejs");
 });
 
 app.post('/loadGame', urlencodedParser, function(req, res)//game loading
