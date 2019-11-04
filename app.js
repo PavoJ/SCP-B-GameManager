@@ -15,6 +15,9 @@ var Flaws = fileParse.jsonConvert('./Flaws.json').f;
 
 var playerData = {};
 var playerCount = 0;
+
+var tempData = {};
+var tempCount = 0;
 var tempChar;
 
 app.set('view engine', 'ejs');
@@ -26,7 +29,7 @@ app.get('/', function(req, res){//start
 
 app.get('/FF', function(req, res)
 {
-  res.render('onlyFF.ejs', {'playerNum':playerCount});
+  res.render('onlyFF.ejs');
 });
 
 app.post('/F&F', urlencodedParser, function(req, res){//dopo aver scelto il nome e le stats del personaggio
@@ -38,12 +41,13 @@ app.post('/F&F', urlencodedParser, function(req, res){//dopo aver scelto il nome
 
     if(tempChar!=0)
     {
-      playerData[playerCount] = tempChar;
-      playerData[playerCount].player = playerCount+1;
-      console.log(playerData[playerCount].playerName + "\n" + playerData[playerCount].player);
-      ++playerCount;
+      tempData[tempCount] = tempChar;
+      tempData[tempCount].player = tempCount+1;
+      tempData[tempCount].currentPlayer = -1;
+      console.log(tempData[tempCount].playerName + "\n" + tempData[tempCount].player);
+      tempCount++;
 
-      res.render('Feats&Flaws.ejs', {'playerNum':playerCount, 'data':playerData[playerCount-1]});
+      res.render('Feats&Flaws.ejs', {'playerNum':tempCount, 'data':tempData[tempCount-1]});
     }
     else
     {
@@ -73,26 +77,44 @@ app.post('/start', urlencodedParser, function(req, res){//Dopo aver scelto i fea
 
     }
   }
-  if(count<=2)
+  if(count<=2)//se i FF sono validi
   {
     for( a=0 ; a<h.length ; a++ )
       if(h[a]!='playerNum')
       {
         if(Number(h[a])<=83)
         {
-          playerData[Number(req.body.playerNum)-1].ff.push(Feats[Number(h[a])]);
+          tempData[Number(req.body.playerNum)-1].ff.push(Feats[Number(h[a])]);
         }
         else
         {
-          playerData[Number(req.body.playerNum)-1].ff.push(Flaws[Number(h[a])-84]);
+          tempData[Number(req.body.playerNum)-1].ff.push(Flaws[Number(h[a])-84]);
         }
       }
-      //res.render('gameStart.ejs', {'data': playerData[Number(req.body.playerNum)-1]});
-      res.render('gameStartimg.ejs', {'data': playerData[Number(req.body.playerNum)-1]});
+
+      if(tempData[Number(req.body.playerNum)-1].currentPlayer==-1)
+      {
+        playerData[playerCount] = tempData[Number(req.body.playerNum)-1];
+        playerData[playerCount].player = playerCount+1;
+        playerCount++;
+
+        delete tempData[Number(req.body.playerNum)-1];
+        tempData[Number(req.body.playerNum)-1] = {};
+        tempData[Number(req.body.playerNum)-1].currentPlayer = playerCount-1;
+
+        console.log(playerData[playerCount-1]);
+
+        res.render('gameStartimg.ejs', {'data': playerData[playerCount-1]});
+      }
+      else
+      {
+        res.render('gameStartimg.ejs', {'data': playerData[tempData[Number(req.body.playerNum)-1].currentPlayer]});
+      }
+
   }
   else
   {
-    res.render('wrongFeats&Flaws.ejs', {'playerNum':req.body.playerNum, 'data':playerData[Number(req.body.playerNum)-1]});
+    res.render('wrongFeats&Flaws.ejs', {'playerNum':req.body.playerNum, 'data':tempData[Number(req.body.playerNum)-1]});
   }
 
 });
@@ -221,7 +243,7 @@ app.post('/saveGame', urlencodedParser, function(req, res)//game saving
 app.post('/loadGame', urlencodedParser, function(req, res)//game loading
 {
   playerData = fileParse.jsonConvert("./saves/"+req.body.data+'.json');
-  playerCount = playerData.length;
+  playerCount = playerData.length||0;
   console.log("loaded save. playerCount:"+playerCount);
   res.render('GMPanel.ejs');
 });

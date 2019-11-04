@@ -166,21 +166,19 @@
     var receivedPD = false;;
 
     socket.emit('playerList');
-    socket.on('playerInfo', function(pd){
+    socket.on('playerInfo', function(playerData){
       if(!receivedPD)
       {
         receivedPD = true;
-        playerData = pd;
-        console.log('playerData received.');
-        for(i = 0 ; i<playerData.length ; ++i)
+        console.log(playerData);
+        for(i = 0 ; i<Object.keys(playerData).length ; i++)
         {
           sel[i] = false;
-          var a = +playerData[i].player-1;
 
-          $('#pList').append('<td class="gmListTable"><input type="checkbox" form="pMod" value="' + a + '" id="'+ a +'" name="playerList" class="gmP hide"><label class="gmList" for="' + a + '">[' + playerData[i].playerName + ']</label></td>');
-          $('#pList').append('<td class="gmListTable hide"><input type="checkbox" form="invAdd" value="' + a + '" id="i'+ a +'" name="playerList" class="gmP hide"></td>');
+          $('#pList').append('<td class="gmListTable"><input type="checkbox" form="pMod" value="' + i + '" id="'+ i +'" name="playerList" class="gmP hide"><label class="gmList" for="' + i + '">[' + playerData[i].playerName + ']</label></td>');
+          $('#pList').append('<td class="gmListTable hide"><input type="checkbox" form="invAdd" value="' + i + '" id="i'+ i +'" name="playerList" class="gmP hide"></td>');
 
-          players[i] = document.getElementById(a);
+          players[i] = document.getElementById(i);
 
           players[i].addEventListener("click", playerLis);
         }
