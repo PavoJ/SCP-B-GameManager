@@ -41,7 +41,7 @@ app.post('/F&F', urlencodedParser, function(req, res){//dopo aver scelto il nome
 
     if(tempChar!=0)
     {
-      tempData[tempCount] = tempChar;
+      tempData[tempCount] = JSON.parse(JSON.stringify(tempChar));
       tempData[tempCount].player = tempCount+1;
       tempData[tempCount].currentPlayer = -1;
       console.log(tempData[tempCount].playerName + "\n" + tempData[tempCount].player);
@@ -58,6 +58,20 @@ app.post('/F&F', urlencodedParser, function(req, res){//dopo aver scelto il nome
 });
 
 app.post('/start', urlencodedParser, function(req, res){//Dopo aver scelto i feats e flaws
+
+  if(tempData[Number(req.body.playerNum)-1]==undefined || req.body.playerName!=tempData[Number(req.body.playerNum)-1].playerName)
+  {
+    if(tempData[Number(req.body.playerNum)-1].currentPlayer!=-1)
+    {
+      res.render('gameStartimg.ejs', {'data': playerData[tempData[Number(req.body.playerNum)-1].currentPlayer]});
+    }
+    else
+    {
+      res.render('index.ejs');
+    }
+  }
+
+  delete req.body.playerName;
   var h = Object.keys(req.body);
   var count = 0;
 
@@ -94,12 +108,10 @@ app.post('/start', urlencodedParser, function(req, res){//Dopo aver scelto i fea
 
       if(tempData[Number(req.body.playerNum)-1].currentPlayer==-1)
       {
-        playerData[playerCount] = tempData[Number(req.body.playerNum)-1];
+        playerData[playerCount] = JSON.parse(JSON.stringify(tempData[Number(req.body.playerNum)-1]));
         playerData[playerCount].player = playerCount+1;
         playerCount++;
 
-        delete tempData[Number(req.body.playerNum)-1];
-        tempData[Number(req.body.playerNum)-1] = {};
         tempData[Number(req.body.playerNum)-1].currentPlayer = playerCount-1;
 
         console.log(playerData[playerCount-1]);
@@ -258,10 +270,10 @@ io.on('connection', function(socket){
       io.emit("inv"+pNum, playerData[Number(pNum)-1].inventory, playerData[Number(pNum)-1].weight);
     }
   });
-  socket.on("F&F_req", function(){
+  socket.on("F&F_req", function(){//richiesti per elencarli
     io.emit("F&F", Feats, Flaws);
   });
-  socket.on("FFReq", function(pNum){
+  socket.on("FFReq", function(pNum){//richiesti da un giocatore
     io.emit("FF"+pNum, playerData[Number(pNum-1)].ff);
   });
   socket.on("pInfo", function(pNum, cond){
@@ -269,10 +281,9 @@ io.on('connection', function(socket){
     {
       io.emit("ePInfo"+pNum, playerData[pNum]);
     }
-    else {
-      {
+    else
+    {
         io.emit("ePInfo"+pNum, 0);
-      }
     }
   });
 });
