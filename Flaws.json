@@ -9,14 +9,14 @@
 
   {
     "name":"Dipendenza da Alcol (-2)",
-    "desc":"Hai bisogno di alcol una volta al giorno. Una volta ottenuta hai -1 ai tiri di experience per un ora. Se non ottieni Alcol ogni 24 ore cominci ad avere -1 ai tiri di agility e might.",
+    "desc":"Hai bisogno di alcol una volta al giorno. Una volta assunto hai -1 ai tiri di experience per un ora. Se non ottieni Alcol ogni 24 ore cominci ad avere -1 ai tiri di agility e might.",
     "req":"Vit>9",
     "cost":-2
   },
 
   {
     "name":"Dipendenza da Sigarette(-3)",
-    "desc":"Hai bisogno di sigarette una volta al giorno. Se non la fumi almeno una volta ogni 24 ore cominci ad avere -2 ai tiri di agility e might.",
+    "desc":"Hai bisogno di sigarette una volta al giorno. Se non ne fumi almeno una volta ogni 24 ore cominci ad avere -2 ai tiri di agility e might.",
     "req":"Vit>9",
     "cost":-3
   },
